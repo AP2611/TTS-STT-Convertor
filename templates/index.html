@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech and Speech-to-Text</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            background-color:SlateBlue;
+
+        }
+
+        h1 {
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        p {
+            margin-top: 15px;
+            color: #333;
+        }
+        .heading{
+        font-family: "Lucida Console", "Courier New", monospace;
+        }
+        img{
+        width : 20%;
+        height: auto;
+        }
+        .header1{
+        font-size:30px;
+        font-weight:bold;
+        }
+        .main{
+        text-color:black;
+        }
+
+    </style>
+</head>
+<body>
+    <center><u><h1 class="heading">TEXT-TO-SPEECH AND SPEECH-TO-TEXT</h1></u></center>
+    <br>
+    <center><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrHro6d3BTw7ZZ4IXgfb6_8aESB7-SsWfelDSSInZVamiMSnYpBZzGBaZBBrWxWwYgLqOHuOtroGvGjxrwzdUkhjwuIvM1u6chIblGKS1gQ6JVkjXr-Vztyk2zoYb1ylvhNgLgC5q6M-7LaiXT1xnAT96DvkPx89APNb8JEaz-1mnMRcfaOYYBHzQL/s1600/Text%20to%20Speech%20-%20Social%20-%201024x512.png"></center>
+    <form action="/text_to_speech" method="post">
+        <label for="text">Enter text:</label>
+        <input type="text" name="text" required>
+        <button type="submit">Convert to Speech</button>
+    </form>
+
+    <form action="/speech_to_text" method="post" enctype="multipart/form-data">
+        <label for="audio">Upload audio file:</label>
+        <input type="file" name="audio" accept=".wav, .mp3" required>
+        <button type="submit">Convert to Text</button>
+    </form>
+
+    {% if result == 'text_to_speech' %}
+        <audio controls>
+            <!-- Use data URI to embed audio data directly -->
+            <source src="data:audio/mp3;base64,{{ audio }}" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    {% elif result == 'speech_to_text' %}
+        <p class="header1">Text from Speech:</p>
+        <p class="main">{{ text }}</p>
+    {% endif %}
+
+</body>
+</html>
+
+
